@@ -3,13 +3,6 @@ from htmlnode import LeafNode, ParentNode, HTMLNode
 
 
 class TestHTMLNode(unittest.TestCase):
-    def test_to_html_props(self):
-        node = HTMLNode(
-            "div",
-            "Hello, world!",
-            None,
-            {"class": "greeting", "href": "https://boot.dev"},
-        )
 
     def test_to_html_no_children(self):
         node = LeafNode("p", "Hello, world!")
