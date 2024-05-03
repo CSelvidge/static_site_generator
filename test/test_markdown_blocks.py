@@ -2,12 +2,6 @@ import unittest
 from markdown_blocks import (
     markdown_to_blocks,
     block_to_block_type,
-    block_to_code_html,
-    block_to_quote_html,
-    block_to_ulist_html,
-    block_to_olist_html,
-    block_to_heading_html,
-    block_to_paragraph_html,
     markdown_to_html_node
 )
 from conversion import convert_type
