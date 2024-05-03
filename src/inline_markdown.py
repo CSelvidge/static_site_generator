@@ -2,13 +2,6 @@ import re
 from textnode import TextNode
 from conversion import convert_type
 
-valid_markdown = {
-    "**": "bold",
-    "*": "italic",
-    "`": "code",
-}
-
-
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     return_list = []
     

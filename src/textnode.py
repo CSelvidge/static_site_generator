@@ -1,12 +1,5 @@
 from htmlnode import LeafNode
 
-text_type_text = "text"
-text_type_bold = "bold"
-text_type_italic = "italic"
-text_type_code = "code"
-text_type_link = "link"
-text_type_image = "image"
-
 valid_types = {"text": lambda text_node: LeafNode(None, text_node.text), 
                     "bold": lambda text_node: LeafNode("b", text_node.text), 
                     "italic": lambda text_node: LeafNode("i", text_node.text), 

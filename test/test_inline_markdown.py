@@ -8,15 +8,8 @@ from inline_markdown import (
     extract_markdown_images,
     text_to_textnodes
 )
-from textnode import (
-    TextNode,
-    text_type_text,
-    text_type_bold,
-    text_type_italic,
-    text_type_code,
-    text_type_image,
-    text_type_link,
-)
+from textnode import TextNode
+
 
 
 class TestInlineMarkdown(unittest.TestCase):
