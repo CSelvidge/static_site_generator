@@ -22,14 +22,6 @@ class HTMLNode:
     def to_html(self):
         raise NotImplementedError
     
-    def props_to_html(self):
-        if not self.props:
-            return ""
-        string = ""
-        for key, value in self.props.items():
-            string = string + f' {key}="{value}"'
-        return string.rstrip()
-
 class LeafNode(HTMLNode):
     def __init__(self, tag, value, props = None):
         super().__init__(value = value, tag = tag, props = props)

@@ -10,10 +10,6 @@ class TestHTMLNode(unittest.TestCase):
             None,
             {"class": "greeting", "href": "https://boot.dev"},
         )
-        self.assertEqual(
-            node.props_to_html(),
-            ' class="greeting" href="https://boot.dev"',
-        )
 
     def test_to_html_no_children(self):
         node = LeafNode("p", "Hello, world!")
