@@ -44,7 +44,7 @@ class LeafNode(HTMLNode):
         else:
             return f"{self.value}"
     
-    def generate_attributes_str(self) -> str:
+    def generate_attributes_str(self) -> str: #Does the same thing as the HTMLNode.props_to_html(), I just prefered it being here, will remove the tests that require props_to_html, and the function itself, when I refactor the tests later
         if not self.props:
             return ""
         attributes_str = ""
