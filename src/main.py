@@ -103,8 +103,7 @@ def generate_page(from_path, template_path, dest_path):
 
         from_path is the location of the markdown file
         template_path is the location of the template file
-        dest_path is the root directory of the server facing the user
-                                                                        """
+        dest_path is the root directory of the server facing the user """
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
 
     title = extract_title(from_path)
@@ -118,7 +117,7 @@ def generate_page(from_path, template_path, dest_path):
 
     replaced_title = re.sub(r"({{\s*Title\s*}})", title, template_contents) #Not a bad idea to refactor this code and move this out to a function pair that can find placeholder text, add it to a dictionary, then replace it
     replaced_content = re.sub(r"({{\s*Content\s*}})", f"{html_text}", replaced_title) #Outside my current expertise and scope for this assignment
-    
+
     converted_path = convert_extension(os.path.splitext(dest_path)) #converts the .md file extension to .html, the function is located at .src/conversion with the dictionary of extensions
 
     write_text_file(converted_path, replaced_content)
@@ -140,7 +139,7 @@ def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
         elif os.path.isdir(content_path):
             if not os.path.isdir(dst_path):
                 os.mkdir(dst_path)
-            generate_pages_recursive(content_path,template_path, dst_path)
+            generate_pages_recursive(content_path, template_path, dst_path)
     
     
 dir_transfer()
