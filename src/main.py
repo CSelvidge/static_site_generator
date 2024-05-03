@@ -24,7 +24,7 @@ def dir_transfer():
     recursive_transfer(source, target_dir, logging_path)
 
 def directory_cleanup(target_dir):
-    
+
     for item in os.listdir(target_dir): #Would be faster to just delete and remake the directory, but this way feels safer
         item_path = os.path.join(target_dir, item)
         if os.path.isfile(item_path):
@@ -83,26 +83,37 @@ def extract_title(markdown):
             return line[2:]
     raise ValueError("All pages need a title!")
 
+def read_text_file(file_path) -> str:
+    try:
+        with open(file_path, "r") as current_file:
+            return current_file.read()
+    except FileNotFoundError:
+        print(f"The file {file_path} does not exist.")
+    
+def write_text_file(file_path, content, overwrite=False):
+    try:
+        with open(file_path, "w") as current_file:
+            current_file.write(content)
+    except PermissionError:
+        print(f"Do not have persmission to write to file at: {file_path}")
+        
 def generate_page(from_path, template_path, dest_path):
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
 
     title = extract_title(from_path)
 
-    with open(from_path, "r") as current_file:
-        contents = current_file.read()
+    contents = read_text_file(from_path)
 
-    variable = markdown_to_html_node(contents)
-    variable_html = variable.to_html()
+    html_nodes = markdown_to_html_node(contents)
+    html_text = html_nodes.to_html()
         
-    
-    with open(template_path, "r") as template_file:
-        template_contents = template_file.read()
+    template_contents = read_text_file(template_path)
 
     replaced_title = re.sub(r"({{\s*Title\s*}})", title, template_contents)
-    replaced_content = re.sub(r"({{\s*Content\s*}})", f"{variable_html}", replaced_title)
+    replaced_content = re.sub(r"({{\s*Content\s*}})", f"{html_text}", replaced_title)
+    converted_path = convert_extension(os.path.splitext(dest_path))
 
-    with open(convert_extension(os.path.splitext(dest_path)), "x") as file:
-        file.write(replaced_content)
+    write_text_file(converted_path, replaced_content)
 
 def recursive_html(node):
     if not isinstance(node, list):
