@@ -66,7 +66,7 @@ def dir_transfer_logging(file_name, src, dst, logging_path, success, error_messa
     current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     status = "SUCCESS" if success else "FAILURE"
 
-    log_message = f"[{current_time} {status}: {file_name} from {src} to {dst}.]\n"
+    log_message = f"[{current_time} {status}: Copying {file_name} from {src} to {dst}.]\n"
 
     if not success:
         log_message += f"Error Message: {error_message}\n"
@@ -99,11 +99,14 @@ def write_text_file(file_path, content, overwrite=False):
 
 def generate_page(from_path, template_path, dest_path):
     """ This function generates a .html file from a markdown file given a template
+        Theoretically this project is set up to allow for future expansion, converting more types than just .md
         The title is the first h1 header found, if no h1 is found an exception will be raised
 
         from_path is the location of the markdown file
         template_path is the location of the template file
-        dest_path is the root directory of the server facing the user """
+        dest_path is the root directory of the server facing the user 
+    """
+
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
 
     title = extract_title(from_path)
@@ -115,8 +118,8 @@ def generate_page(from_path, template_path, dest_path):
         
     template_contents = read_text_file(template_path)
 
-    replaced_title = re.sub(r"({{\s*Title\s*}})", title, template_contents) #Not a bad idea to refactor this code and move this out to a function pair that can find placeholder text, add it to a dictionary, then replace it
-    replaced_content = re.sub(r"({{\s*Content\s*}})", f"{html_text}", replaced_title) #Outside my current expertise and scope for this assignment
+    replaced_title = re.sub(r"({{\s*Title\s*}})", title, template_contents) #Not a bad idea to refactor this code and move this out to a function pair that can find placeholder text, add it to a dictionary, then replace it, however ->
+    replaced_content = re.sub(r"({{\s*Content\s*}})", html_text, replaced_title) #-> outside my current expertise and scope for this assignment
 
     converted_path = convert_extension(os.path.splitext(dest_path)) #converts the .md file extension to .html, the function is located at .src/conversion with the dictionary of extensions
 

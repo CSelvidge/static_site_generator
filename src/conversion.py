@@ -1,3 +1,12 @@
+"""
+This entire first section exists because I disliked the lecture tests using variables such as "text_type_text",
+Later i will replace all of the gross "conversion_type("text_type_text")"s in the test files with just "text",
+leaving this code here after I do, incase the section gets updated, or I need to come back to it for whatever reason
+
+
+"""
+
+
 TYPE_MAPPING = {
         "valid_markdown":{
 
@@ -31,7 +40,7 @@ def convert_type(argument_name) -> str:
             if key == argument_name:
                 return value
             
-EXTENSION_CONVERSIONS = {
+EXTENSION_CONVERSIONS = {#Silly to make a dictionary with one pair, but if this ever needed to convert more than one file type this would be an easy way to update
     ".md": ".html"
 }
 
