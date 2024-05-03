@@ -14,12 +14,7 @@ def dir_transfer():
     if not os.path.isdir("../public"):
         os.mkdir("../public")
 
-    for item in os.listdir(target_dir): #Would be faster to just delete and remake the directory, but this way feels safer
-        item_path = os.path.join(target_dir, item)
-        if os.path.isfile(item_path):
-            os.remove(item_path)
-        elif os.path.isdir(item_path):
-            shutil.rmtree(item_path)
+    directory_cleanup(target_dir)
 
     logging_path = create_log()
 
@@ -27,6 +22,15 @@ def dir_transfer():
         raise Exception("Logging file created incorrectly or failed to be created.")
     
     recursive_transfer(source, target_dir, logging_path)
+
+def directory_cleanup(target_dir):
+    
+    for item in os.listdir(target_dir): #Would be faster to just delete and remake the directory, but this way feels safer
+        item_path = os.path.join(target_dir, item)
+        if os.path.isfile(item_path):
+            os.remove(item_path)
+        elif os.path.isdir(item_path):
+            shutil.rmtree(item_path)
 
 def recursive_transfer(src, dst, logging_path):#Recursive, end case is when it can no longer find a unique file
     contents = os.listdir(src)
